@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/styles/header.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<head>
+    <title>Sucursales</title>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <h1>
+        Bienvenido a la página de sucursales
+    </h1>
+    <p>
+        Aquí podrás encontrar la lista de todas las sucursales de la empresa.
+    </p>
+    <div>
+       
+        <ul>
+            <li>Sucursal Buenos Aires</li>
+            <li>Sucursal Córdoba</li>
+            <li>Sucursal Rosario</li>
+        </ul>
+    </div>
+
+    <div th:replace="~{fragments/modals :: loginRegisterModals}"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

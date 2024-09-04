@@ -1,0 +1,39 @@
+
+<header th:fragment="header">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Mi Sitio</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item mx-3" th:if="${session.isAuth == true and session.usuario?.rol == 'ADMIN'}">
+                    <a class="nav-link enlarged-text" href="/admin">Administracion</a>
+                </li>
+               
+                <li class="nav-item mx-3">
+                    <a class="nav-link enlarged-text" href="/">Inicio</a>
+                </li> 
+                <li class="nav-item mx-3">
+                    <a class="nav-link enlarged-text" href="/productos">Productos</a>
+                </li>
+                <li class="nav-item mx-3">
+                    <a class="nav-link enlarged-text" href="/contacto">Contacto</a>
+                </li>
+                <li class="nav-item mx-3" th:if="${session.isAuth}">
+                    <a class="nav-link enlarged-text" href="/miPerfil">Perfil</a>
+                </li>
+                <li class="nav-item mx-3" th:if="${session.isAuth}">
+                    <a class="nav-link enlarged-text" href="/logout">Cerrar Sesion</a>
+                </li>
+                
+                <!-- Mostrar 'Iniciar Sesión'si no hay un usuario en la sesión -->
+                <li class="nav-item mx-3" th:if="${session.isAuth != true}">
+                    <a class="nav-link enlarged-text" href="#" data-toggle="modal" data-target="#loginModal">Iniciar Sesión</a>
+                </li>
+
+            </ul>
+        </div>
+    </nav>
+</header>
+

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/styles/header.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<head>
+    <title>Pedido Confirmado</title>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div th:replace="~{fragments/modals :: loginRegisterModals}"></div>
+    
+    
+    <div class="confirmation-container">
+        <div class="confirmation-card">
+            <div class="checkmark-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
+                    <path d="M13.854 3.146a.5.5 0 0 1 0 .708l-8 8a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L5 10.293l7.146-7.147a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            </div>
+            <h1>Pedido Confirmado</h1>
+            <p>Le estaremos enviando los detalles de su pedido por correo electrónico.</p>
+            <a href="/productos" class="btn btn-primary">Volver a la tienda</a>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

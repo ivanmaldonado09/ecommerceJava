@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/styles/header.css">
+<link rel="stylesheet" href="/styles/contacto.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<head>
+    <title>Contacto</title>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+<h1>Sucursal principal</h1>
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Informacion de Contacto</h5>
+                <p class="card-text">Telefono: 123-456-7890</p>
+                <p class="card-text">Email: example@example.com</p>
+                <p class="card-text">Direccion: Calle 123</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-center"></div>
+    <a href="/contacto/verSucursales">Visita nuestras otras sucursales</a>
+</div>
+
+    <div th:replace="fragments/modals :: loginRegisterModals"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
