@@ -1,8 +1,8 @@
-Proyecto de pagina web ecommerce, utilizando el lenguaje Java. 
+Proyecto de pagina web ecommerce siguiendo patron MVC, utilizando el lenguaje Java y el framework SpringBoot. 
 
 Se utiliza: 
 
--Thymeleaf como framework para front end
+-Thymeleaf
 
 -Docker
 
