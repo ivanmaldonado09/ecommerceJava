@@ -22,7 +22,7 @@ public class Producto {
     private String imagen;
     private Integer stock;
     
-   @OneToMany(mappedBy = "producto", cascade = CascadeType.REMOVE)  // Esto eliminará en cascada
+   @OneToMany(mappedBy = "producto") 
     private List<ItemCarrito> itemsCarrito;
      
     
