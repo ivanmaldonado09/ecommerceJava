@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<link rel="stylesheet" href="/styles/header.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<head>
+    <title></title>
+</head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <div th:replace="~{fragments/modals :: loginRegisterModals}"></div>
+    
+    <div th:if="${carrito.items.isEmpty()}">
+        <p>Tu carrito está vacío.</p>
+    </div>
+    
+    <div th:if="${!carrito.items.isEmpty()}">
+        <table>
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${carrito.items}">
+                    <td th:text="${item.producto.nombre}"></td>
+                    <td th:text="${item.cantidad}"></td>
+                    <td th:text="${item.producto.precio}"></td>
+                    <td th:text="${item.cantidad * item.producto.precio}"></td>
+                </tr>
+            </tbody>
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

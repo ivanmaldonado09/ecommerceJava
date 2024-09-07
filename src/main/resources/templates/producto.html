@@ -27,7 +27,7 @@
                     <p th:text="${producto.descripcion}"></p>
                     <span class="product-price" th:text="'$' + ${producto.precio}"></span>
                     <div class="product-actions">
-                        <button id="carritoButton" th:onclick="'añadirAlCarrito(' + ${producto.id} + ')'">Agregar al Carrito</button>
+                        <a th:href="@{/carrito/agregar/{id}(id=${producto.id})}" class="btn btn-primary" id="carritoButton">Agregar al carrito</a>
                         <a th:href="@{/productos/comprarAhora/{id}(id=${producto.id})}" class="btn btn-primary" id="comprarButton">Comprar</a>
                     </div>
                 </div>

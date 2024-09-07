@@ -21,6 +21,16 @@ public class Usuario {
     private String password;
     private String rol;
     
+    @OneToOne(mappedBy = "usuario")
+    private Carrito carrito;
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
 
     public Long getId() {
         return id;
