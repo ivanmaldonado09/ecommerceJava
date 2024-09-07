@@ -20,12 +20,6 @@ public class Usuario {
     private String nombre;
     private String password;
     private String rol;
-
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Carrito carrito;
-
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Orden> ordenes;
     
 
     public Long getId() {
@@ -66,22 +60,6 @@ public class Usuario {
 
     public void setRol(String rol) {
         this.rol = rol;
-    }
-
-    public Carrito getCarrito() {
-        return carrito;
-    }
-
-    public void setCarrito(Carrito carrito) {
-        this.carrito = carrito;
-    }
-
-    public List<Orden> getOrdenes() {
-        return ordenes;
-    }
-
-    public void setOrdenes(List<Orden> ordenes) {
-        this.ordenes = ordenes;
     }
 
 }

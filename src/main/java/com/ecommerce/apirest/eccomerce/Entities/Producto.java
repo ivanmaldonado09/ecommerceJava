@@ -23,11 +23,7 @@ public class Producto {
     private Integer stock;
     
 
-     @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ItemCarrito> itemsCarrito;
-
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<ItemOrden> itemsOrden;
+     
     
     public Integer getStock() {
         return stock;
@@ -77,19 +73,5 @@ public class Producto {
         this.imagen = imagen;
     }
 
-    public List<ItemCarrito> getItemsCarrito() {
-        return itemsCarrito;
-    }
-
-    public void setItemsCarrito(List<ItemCarrito> itemsCarrito) {
-        this.itemsCarrito = itemsCarrito;
-    }
-
-    public List<ItemOrden> getItemsOrden() {
-        return itemsOrden;
-    }
-
-    public void setItemsOrden(List<ItemOrden> itemsOrden) {
-        this.itemsOrden = itemsOrden;
-    }
+ 
 }
