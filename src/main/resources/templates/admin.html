@@ -10,7 +10,7 @@
     <div th:replace="~{fragments/header :: header}"></div>
 
     <div class="mb-3">
-        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Agregar Producto</a>
+        <a href="#" class="btn btn-primary" th:href="@{/admin/product/saveForm}">Agregar Producto</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -20,130 +20,38 @@
                 <th>Descripción</th>
                 <th>Precio</th>
                 <th>Stock</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="producto : ${productos}">
+            <tr th:each="producto : ${productos}" th:id="'producto-' + ${producto.id}">
                 <td th:text="${producto.id}"></td>
                 <td th:text="${producto.nombre}"></td>
                 <td th:text="${producto.descripcion}"></td>
                 <td th:text="${producto.precio}"></td>
                 <td th:text="${producto.stock}"></td>
+                <td th:text="${producto.imagen}" ></td>
                 <td>
-                    <a href="#" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editProductModal" th:data-product-id="${producto.id}">Editar</a>
-                    <a href="#" class="btn btn-danger btn-sm" th:href="@{/admin/products/delete/{id}(id=${producto.id})}">Eliminar</a>
+                    <a href="#" class="btn btn-warning btn-sm" th:href="@{/admin/product/edit/{id}(id=${producto.id})}">Editar</a>
+
+
+                    <a href="#" class="btn btn-danger btn-sm" th:href="@{/admin/product/delete/{id}(id=${producto.id})}">Eliminar</a>                    
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<!-- Add Product Modal -->
-<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addProductModalLabel">Agregar Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/admin/products/add}" method="post" enctype="multipart/form-data">
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="nombre" name="nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="descripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="descripcion" name="descripcion" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="precio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="precio" name="precio" step="0.01" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="stock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="stock" name="stock" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="imagen" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="imagen" name="imagen">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Agregar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Edit Product Modal -->
-<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editProductModalLabel">Editar Producto</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form th:action="@{/admin/products/edit}" method="post" enctype="multipart/form-data">
-                    <input type="hidden" id="productId" name="id">
-                    <div class="mb-3">
-                        <label for="editNombre" class="form-label">Nombre</label>
-                        <input type="text" class="form-control" id="editNombre" name="nombre" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editDescripcion" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="editDescripcion" name="descripcion" required></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editPrecio" class="form-label">Precio</label>
-                        <input type="number" class="form-control" id="editPrecio" name="precio" step="0.01" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editStock" class="form-label">Stock</label>
-                        <input type="number" class="form-control" id="editStock" name="stock" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="editImagen" class="form-label">Imagen</label>
-                        <input type="file" class="form-control" id="editImagen" name="imagen">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Actualizar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <div th:replace="fragments/modals :: loginRegisterModals"></div>
+<div th:replace="~{fragments/modals :: loginRegisterModals}"></div>
 
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Código para rellenar el modal de edición con datos del producto
-            var editProductModal = document.getElementById('editProductModal');
-            editProductModal.addEventListener('show.bs.modal', function (event) {
-                var button = event.relatedTarget; // Botón que activó el modal
-                var productId = button.getAttribute('data-product-id'); // Extraer ID del producto
-    
-                var form = editProductModal.querySelector('form');
-                form.querySelector('#productId').value = productId;
-    
-                // Aquí podrías hacer una solicitud AJAX para obtener los detalles del producto
-                // y rellenar el formulario de edición. Ejemplo básico:
-                fetch(`/admin/products/${productId}`)
-                    .then(response => response.json())
-                    .then(product => {
-                        form.querySelector('#editNombre').value = product.nombre;
-                        form.querySelector('#editDescripcion').value = product.descripcion;
-                        form.querySelector('#editPrecio').value = product.precio;
-                        form.querySelector('#editStock').value = product.stock;
-                    });
-            });
-        });
-    </script>
+   
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </body>
 </html>

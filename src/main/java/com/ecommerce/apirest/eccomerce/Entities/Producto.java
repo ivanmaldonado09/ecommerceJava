@@ -1,10 +1,10 @@
 package com.ecommerce.apirest.eccomerce.Entities;
 
+
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,7 +22,8 @@ public class Producto {
     private String imagen;
     private Integer stock;
     
-
+   @OneToMany(mappedBy = "producto", cascade = CascadeType.REMOVE)  // Esto eliminará en cascada
+    private List<ItemCarrito> itemsCarrito;
      
     
     public Integer getStock() {

@@ -3,6 +3,7 @@ package com.ecommerce.apirest.eccomerce.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,12 @@ public class ProductoController {
         List<Producto> productos = productoRepository.findAll();
         model.addAttribute("productos", productos);
         return "producto";
+    }
+
+    @GetMapping("/detalle/{id}")
+    public ResponseEntity<Producto> getProductById(@PathVariable Long id) {
+        Producto producto = productoRepository.findById(id).orElseThrow(() -> new RuntimeException("Producto con id: " +id+ " no encontrado"));
+        return ResponseEntity.ok(producto);
     }
 
     @GetMapping("/{id}")
