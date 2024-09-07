@@ -3,28 +3,20 @@ package com.ecommerce.apirest.eccomerce.Controllers;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.ecommerce.apirest.eccomerce.Entities.Producto;
 import com.ecommerce.apirest.eccomerce.Entities.Usuario;
-import com.ecommerce.apirest.eccomerce.Repositories.ItemCarritoRepository;
 import com.ecommerce.apirest.eccomerce.Repositories.ProductoRepository;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 
     
 @Controller
@@ -34,8 +26,7 @@ public class AdminController {
     @Autowired
     private ProductoRepository productoRepository;
 
-    @Autowired
-    private ItemCarritoRepository itemCarritoRepository;
+  
 
     @GetMapping()
     public String adminHome(Model model, HttpSession session) { 
