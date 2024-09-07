@@ -10,28 +10,90 @@
     <div th:replace="~{fragments/header :: header}"></div>
     <div th:replace="~{fragments/modals :: loginRegisterModals}"></div>
     
-    <div th:if="${carrito.items.isEmpty()}">
-        <p>Tu carrito está vacío.</p>
+    <style>
+        .total-price {
+            font-weight: bold;
+        }
+        .btn-confirmar {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Tu Carrito</h1>
+        
+        <div th:if="${carrito.items.isEmpty()}">
+            <p>Tu carrito está vacío.</p>
+        </div>
+        
+        <div th:if="${!carrito.items.isEmpty()}">
+            <form th:action="@{/carrito/confirmarCompra}" method="post">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${carrito.items}">
+                            <td th:text="${item.producto.nombre}"></td>
+                            <td>
+                                <input type="number" class="form-control" name="cantidad" th:value="${item.cantidad}" min="1" step="1">
+                            </td>
+                            <td th:text="${item.producto.precio}"></td>
+                            <td class="item-total" data-item-id="${item.producto.id}">
+                                <!-- Total calculado con JavaScript -->
+                            </td>
+                            <td>
+                                <a href="#" th:href="@{/carrito/eliminar/{id}(id=${item.producto.id})}" class="btn btn-danger btn-sm">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="d-flex justify-content-between mt-3">
+                    <h4>Total: <span id="totalPrice" class="total-price">0</span></h4>
+                    <button type="submit" class="btn btn-primary btn-confirmar">Confirmar Compra</button>
+                </div>
+            </form>
+        </div>
     </div>
-    
-    <div th:if="${!carrito.items.isEmpty()}">
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="item : ${carrito.items}">
-                    <td th:text="${item.producto.nombre}"></td>
-                    <td th:text="${item.cantidad}"></td>
-                    <td th:text="${item.producto.precio}"></td>
-                    <td th:text="${item.cantidad * item.producto.precio}"></td>
-                </tr>
-            </tbody>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[name="cantidad"]');
+            const totalPriceElement = document.getElementById('totalPrice');
+            
+            function updateTotals() {
+                let total = 0;
+                inputs.forEach(input => {
+                    const itemId = input.getAttribute('data-item-id');
+                    const quantity = parseInt(input.value) || 0;
+                    const price = parseFloat(input.closest('tr').querySelector('td:nth-child(3)').textContent);
+                    const itemTotal = quantity * price;
+                    total += itemTotal;
+                    input.closest('tr').querySelector('.item-total').textContent = itemTotal.toFixed(2);
+                });
+                totalPriceElement.textContent = total.toFixed(2);
+            }
+            
+            inputs.forEach(input => input.addEventListener('input', updateTotals));
+            
+            // Inicializar los totales al cargar la página
+            updateTotals();
+        });
+    </script>
     
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
